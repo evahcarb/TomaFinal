@@ -11,8 +11,7 @@ public class ReviewDocument {
     private String comment;
     private Integer rating;
 
-    public ReviewDocument(String id, String idFilm, String comment, Integer rating) {
-        this.id = id;
+    public ReviewDocument(String idFilm, String comment, Integer rating) {
         this.idFilm = idFilm;
         this.comment = comment;
         this.rating = rating;

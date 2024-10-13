@@ -36,7 +36,7 @@ public class FilmService {
         List<ReviewDocument> reviews = reviewRepository.findAllByIdFilm(film.getId());
         List<ReviewDTO> reviewDTOS = new ArrayList<>();
         for (ReviewDocument i : reviews) {
-            ReviewDTO review = new ReviewDTO(i.getComment(), i.getRating());
+            ReviewDTO review = new ReviewDTO(i.getId(), i.getComment(), i.getRating());
             reviewDTOS.add(review);
         }
         FilmDTO filmdto = new FilmDTO(film.getName(), film.getYear(), film.getDirector(), film.getSynopsis(), reviewDTOS);
