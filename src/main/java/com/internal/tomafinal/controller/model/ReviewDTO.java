@@ -5,7 +5,7 @@ public class ReviewDTO {
     private Integer rating;
     private String user;
 
-    public ReviewDTO(String comment, Integer rating, String user) {
+    public ReviewDTO(String comment, Integer rating) {
         this.comment = comment;
         this.rating = rating;
         this.user = "anonymous";

@@ -9,6 +9,13 @@ public class FilmDTO {
     private String synopsis;
     List<ReviewDTO> review;
 
+    public FilmDTO(String name, Integer year, String director, String synopsis) {
+        this.name = name;
+        this.year = year;
+        this.director = director;
+        this.synopsis = synopsis;
+    }
+
     public FilmDTO(String name, Integer year, String director, String synopsis, List<ReviewDTO> review) {
         this.name = name;
         this.year = year;
