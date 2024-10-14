@@ -7,43 +7,50 @@ public class FilmDTO {
     private Integer year;
     private String director;
     private String synopsis;
+    private Genre genre;
+    private Float avgRating;
     List<ReviewDTO> review;
+
+    public enum Genre {
+        ACTION,
+        ADVENTURE,
+        COMEDY,
+        DRAMA,
+        FANTASY,
+        HORROR,
+        MYSTERY,
+        ROMANCE,
+        SCIENCE_FICTION,
+        THRILLER,
+        DOCUMENTARY,
+        ANIMATION,
+        MUSICAL,
+        CRIME,
+        WAR,
+        WESTERN,
+        BIOGRAPHY,
+        SPORT
+    }
 
     public FilmDTO() {
     }
 
-    public FilmDTO(String name, Integer year, String director, String synopsis) {
+    public FilmDTO(String name, Integer year, String director, String synopsis, Genre genre, Float avgRating) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.synopsis = synopsis;
+        this.genre = genre;
+        this.avgRating = avgRating;
     }
 
-    public FilmDTO(String name, Integer year, String director, String synopsis, List<ReviewDTO> review) {
+    public FilmDTO(String name, Integer year, String director, String synopsis, Genre genre, Float avgRating, List<ReviewDTO> review) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.synopsis = synopsis;
-        this.review = review;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
-    }
-
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
-
-    public void setReview(List<ReviewDTO> review) {
+        this.genre = genre;
+        this.avgRating = avgRating;
         this.review = review;
     }
 
@@ -61,6 +68,14 @@ public class FilmDTO {
 
     public String getSynopsis() {
         return synopsis;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public Float getAvgRating() {
+        return avgRating;
     }
 
     public List<ReviewDTO> getReview() {
