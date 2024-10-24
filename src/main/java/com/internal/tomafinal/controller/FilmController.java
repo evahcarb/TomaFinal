@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/films")
+@CrossOrigin(origins = "http://localhost:5500")
 public class FilmController {
     //inyectamos el servicio
     private FilmService filmService;

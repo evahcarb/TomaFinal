@@ -29,7 +29,16 @@ public class FilmDTO {
         WAR,
         WESTERN,
         BIOGRAPHY,
-        SPORT
+        SPORT;
+
+        public static Genre fromString(String value) {
+            for (Genre v : Genre.values()) {
+                if (value.toUpperCase().equals(v.name())) {
+                    return v;
+                }
+            }
+            return null;
+        }
     }
 
     public FilmDTO() {

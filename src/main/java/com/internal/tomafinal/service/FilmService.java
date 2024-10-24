@@ -60,7 +60,9 @@ public class FilmService {
             reviewDTOS.add(review);
             pointTotalRating += r.getRating();
         }
-        FilmDTO filmDTO = new FilmDTO(film.getName(), film.getYear(), film.getDirector(), film.getSynopsis(), FilmDTO.Genre.valueOf(film.getGenre()), (pointTotalRating / reviewDTOS.size()), reviewDTOS);
+        Float avgRating = !reviewDTOS.isEmpty() ? (pointTotalRating / reviewDTOS.size()) : null;
+        FilmDTO filmDTO = new FilmDTO(film.getName(), film.getYear(), film.getDirector(),
+                film.getSynopsis(), FilmDTO.Genre.fromString(film.getGenre()), avgRating, reviewDTOS);
         return filmDTO;
     }
 
