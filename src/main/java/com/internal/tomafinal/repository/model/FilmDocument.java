@@ -12,13 +12,15 @@ public class FilmDocument {
     private String director;
     private String synopsis;
     private String genre;
+    private String urlFilm;
 
-    public FilmDocument(String name, Integer year, String director, String synopsis, String genre) {
+    public FilmDocument(String name, Integer year, String director, String synopsis, String genre, String urlFilm) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.synopsis = synopsis;
         this.genre = genre;
+        this.urlFilm = urlFilm;
     }
 
     public String getId() {
@@ -43,5 +45,9 @@ public class FilmDocument {
 
     public String getGenre() {
         return genre;
+    }
+
+    public String getUrlFilm() {
+        return urlFilm;
     }
 }

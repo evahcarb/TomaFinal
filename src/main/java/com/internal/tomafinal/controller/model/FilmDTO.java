@@ -10,6 +10,7 @@ public class FilmDTO {
     private Genre genre;
     private Float avgRating;
     List<ReviewDTO> review;
+    private String urlFilm;
 
     public enum Genre {
         ACTION,
@@ -44,16 +45,17 @@ public class FilmDTO {
     public FilmDTO() {
     }
 
-    public FilmDTO(String name, Integer year, String director, String synopsis, Genre genre, Float avgRating) {
+    public FilmDTO(String name, Integer year, String director, String synopsis, Genre genre, Float avgRating, String urlFilm) {
         this.name = name;
         this.year = year;
         this.director = director;
         this.synopsis = synopsis;
         this.genre = genre;
         this.avgRating = avgRating;
+        this.urlFilm = urlFilm;
     }
 
-    public FilmDTO(String name, Integer year, String director, String synopsis, Genre genre, Float avgRating, List<ReviewDTO> review) {
+    public FilmDTO(String name, Integer year, String director, String synopsis, Genre genre, Float avgRating, List<ReviewDTO> review, String urlFilm) {
         this.name = name;
         this.year = year;
         this.director = director;
@@ -61,6 +63,7 @@ public class FilmDTO {
         this.genre = genre;
         this.avgRating = avgRating;
         this.review = review;
+        this.urlFilm = urlFilm;
     }
 
     public String getName() {
@@ -89,5 +92,13 @@ public class FilmDTO {
 
     public List<ReviewDTO> getReview() {
         return review;
+    }
+
+    public String getUrlFilm() {
+        return urlFilm;
+    }
+
+    public void setUrlFilm(String urlFilm) {
+        this.urlFilm = urlFilm;
     }
 }

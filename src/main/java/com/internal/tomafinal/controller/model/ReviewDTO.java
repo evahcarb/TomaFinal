@@ -3,13 +3,13 @@ package com.internal.tomafinal.controller.model;
 public class ReviewDTO {
     private String id;
     private String comment;
-    private Integer rating;
+    private Float rating;
     private String user;
 
     public ReviewDTO() {
     }
 
-    public ReviewDTO(String id, String comment, Integer rating) {
+    public ReviewDTO(String id, String comment, Float rating) {
         this.id = id;
         this.comment = comment;
         this.rating = rating;
@@ -20,7 +20,7 @@ public class ReviewDTO {
         this.comment = comment;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 
@@ -36,7 +36,7 @@ public class ReviewDTO {
         return user;
     }
 
-    public Integer getRating() {
+    public Float getRating() {
         return rating;
     }
 

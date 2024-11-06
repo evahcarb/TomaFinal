@@ -37,8 +37,8 @@ public class FilmService {
         return filmdto;
     }
 
-    public void postFilm(String name, Integer year, String director, String synopsis, FilmDTO.Genre genre) {
-        FilmDocument film = new FilmDocument(name, year, director, synopsis, genre.toString());
+    public void postFilm(String name, Integer year, String director, String synopsis, FilmDTO.Genre genre, String urlFilm) {
+        FilmDocument film = new FilmDocument(name, year, director, synopsis, genre.toString(), urlFilm);
         filmRepository.save(film);
     }
 
@@ -62,7 +62,7 @@ public class FilmService {
         }
         Float avgRating = !reviewDTOS.isEmpty() ? (pointTotalRating / reviewDTOS.size()) : null;
         FilmDTO filmDTO = new FilmDTO(film.getName(), film.getYear(), film.getDirector(),
-                film.getSynopsis(), FilmDTO.Genre.fromString(film.getGenre()), avgRating, reviewDTOS);
+                film.getSynopsis(), FilmDTO.Genre.fromString(film.getGenre()), avgRating, reviewDTOS, film.getUrlFilm());
         return filmDTO;
     }
 

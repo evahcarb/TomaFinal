@@ -16,7 +16,7 @@ public class ReviewService {
         this.filmRepository = filmRepository;
     }
 
-    public boolean putReview(String nameFilm, String comment, Integer rating) {
+    public boolean putReview(String nameFilm, String comment, Float rating) {
         FilmDocument film = filmRepository.findByName(nameFilm);
         if (film == null) {
             return false;

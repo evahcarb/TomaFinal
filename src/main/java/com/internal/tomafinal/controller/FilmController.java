@@ -2,6 +2,8 @@ package com.internal.tomafinal.controller;
 
 import com.internal.tomafinal.controller.model.FilmDTO;
 import com.internal.tomafinal.service.FilmService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,15 +30,15 @@ public class FilmController {
     }
 
     @PostMapping
-    public String postFilm(@RequestBody FilmDTO filmDTO) {
-        filmService.postFilm(filmDTO.getName(), filmDTO.getYear(), filmDTO.getDirector(), filmDTO.getSynopsis(), filmDTO.getGenre());
-        return "Se ha creado correctamente la película con nombre " + filmDTO.getName();
+    public ResponseEntity<FilmDTO> postFilm(@RequestBody FilmDTO filmDTO) {
+        filmService.postFilm(filmDTO.getName(), filmDTO.getYear(), filmDTO.getDirector(), filmDTO.getSynopsis(), filmDTO.getGenre(), filmDTO.getUrlFilm());
+        return ResponseEntity.status(HttpStatus.CREATED).body(filmDTO);
     }
 
     @PutMapping("/{name}")
     public String putFilm(@RequestBody FilmDTO filmDTO) {
         if (filmService.getFilm(filmDTO.getName()) != null) {
-            filmService.postFilm(filmDTO.getName(), filmDTO.getYear(), filmDTO.getDirector(), filmDTO.getSynopsis(), filmDTO.getGenre());
+            filmService.postFilm(filmDTO.getName(), filmDTO.getYear(), filmDTO.getDirector(), filmDTO.getSynopsis(), filmDTO.getGenre(), filmDTO.getUrlFilm());
             return "Se ha modificado correctamente la película con nombre " + filmDTO.getName();
         }
         return "No se ha encontrado la película con nombre " + filmDTO.getName();

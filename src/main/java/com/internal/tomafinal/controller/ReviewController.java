@@ -2,10 +2,13 @@ package com.internal.tomafinal.controller;
 
 import com.internal.tomafinal.controller.model.ReviewDTO;
 import com.internal.tomafinal.service.ReviewService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/reviews")
+@CrossOrigin(origins = "http://localhost:5500")
 public class ReviewController {
     private ReviewService reviewService;
 
@@ -14,11 +17,9 @@ public class ReviewController {
     }
 
     @PutMapping("/{nameFilm}")
-    public String postReview(@RequestBody ReviewDTO review, @PathVariable String nameFilm) {
-        if (reviewService.putReview(nameFilm, review.getComment(), review.getRating())) {
-            return "Review añadida";
-        }
-        return "Película no encontrada";
+    public ResponseEntity<ReviewDTO> postReview(@RequestBody ReviewDTO review, @PathVariable String nameFilm) {
+        reviewService.putReview(nameFilm, review.getComment(), review.getRating());
+        return ResponseEntity.status(HttpStatus.CREATED).body(review);
     }
 
     @DeleteMapping("/{id}")
