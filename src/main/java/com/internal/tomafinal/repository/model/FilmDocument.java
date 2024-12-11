@@ -14,7 +14,8 @@ public class FilmDocument {
     private String genre;
     private String urlFilm;
 
-    public FilmDocument(String name, Integer year, String director, String synopsis, String genre, String urlFilm) {
+    public FilmDocument(String id, String name, Integer year, String director, String synopsis, String genre, String urlFilm) {
+        this.id = id;
         this.name = name;
         this.year = year;
         this.director = director;

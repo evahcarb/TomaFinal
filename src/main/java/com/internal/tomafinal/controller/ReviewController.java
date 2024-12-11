@@ -6,9 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/reviews")
-@CrossOrigin(origins = "http://localhost:5500")
 public class ReviewController {
     private ReviewService reviewService;
 
@@ -28,5 +29,10 @@ public class ReviewController {
             return "Review eliminada";
         }
         return "Review no ha sido eliminada";
+    }
+
+    @GetMapping("/randomReviews")
+    public ResponseEntity<List<ReviewDTO>> getRandomReviews() {
+        return ResponseEntity.status(HttpStatus.OK).body(reviewService.getRandomReviews());
     }
 }

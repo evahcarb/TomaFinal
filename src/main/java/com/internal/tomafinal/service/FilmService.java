@@ -2,7 +2,7 @@ package com.internal.tomafinal.service;
 
 import com.internal.tomafinal.controller.model.FilmDTO;
 import com.internal.tomafinal.controller.model.ReviewDTO;
-import com.internal.tomafinal.repository.FilmMongoRepository;
+import com.internal.tomafinal.repository.FilmCustomRepository;
 import com.internal.tomafinal.repository.ReviewMongoRepository;
 import com.internal.tomafinal.repository.model.FilmDocument;
 import com.internal.tomafinal.repository.model.ReviewDocument;
@@ -13,12 +13,14 @@ import java.util.List;
 
 @Service
 public class FilmService {
-    private FilmMongoRepository filmRepository;
+    private FilmCustomRepository filmRepository;
     private ReviewMongoRepository reviewRepository;
+    private ProviderService providerService;
 
-    public FilmService(FilmMongoRepository filmRepository, ReviewMongoRepository reviewRepository) {
+    public FilmService(FilmCustomRepository filmRepository, ReviewMongoRepository reviewRepository, ProviderService providerService) {
         this.filmRepository = filmRepository;
         this.reviewRepository = reviewRepository;
+        this.providerService = providerService;
     }
 
     public List<FilmDTO> getFilms() {
@@ -34,11 +36,13 @@ public class FilmService {
     public FilmDTO getFilm(String name) {
         FilmDocument film = filmRepository.findByName(name);
         FilmDTO filmdto = getFilmDTO(film);
+        List<String> providerNames = providerService.getProviderNames(name);
+        filmdto.setProviderNames(providerNames);
         return filmdto;
     }
 
-    public void postFilm(String name, Integer year, String director, String synopsis, FilmDTO.Genre genre, String urlFilm) {
-        FilmDocument film = new FilmDocument(name, year, director, synopsis, genre.toString(), urlFilm);
+    public void postFilm(String name, Integer year, String director, String synopsis, FilmDTO.GenreDTO genre, String urlFilm) {
+        FilmDocument film = new FilmDocument(null, name, year, director, synopsis, genre.toString(), urlFilm);
         filmRepository.save(film);
     }
 
@@ -49,6 +53,16 @@ public class FilmService {
             return true;
         }
         return false;
+    }
+
+    public List<FilmDTO> getFilmsByFilter(String name, Integer year, String genre) {
+        List<FilmDocument> films = filmRepository.findByDynamicFilter(name, year, genre);
+        List<FilmDTO> filmDTOS = new ArrayList<>();
+        for (FilmDocument f : films) {
+            FilmDTO filmDTO = getFilmDTO(f);
+            filmDTOS.add(filmDTO);
+        }
+        return filmDTOS;
     }
 
     private FilmDTO getFilmDTO(FilmDocument film) {
@@ -62,8 +76,9 @@ public class FilmService {
         }
         Float avgRating = !reviewDTOS.isEmpty() ? (pointTotalRating / reviewDTOS.size()) : null;
         FilmDTO filmDTO = new FilmDTO(film.getName(), film.getYear(), film.getDirector(),
-                film.getSynopsis(), FilmDTO.Genre.fromString(film.getGenre()), avgRating, reviewDTOS, film.getUrlFilm());
+                film.getSynopsis(), FilmDTO.GenreDTO.fromString(film.getGenre()), avgRating, reviewDTOS, film.getUrlFilm());
         return filmDTO;
     }
+
 
 }

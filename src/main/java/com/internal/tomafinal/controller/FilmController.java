@@ -10,9 +10,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/films")
-@CrossOrigin(origins = "http://localhost:5500")
 public class FilmController {
-    //inyectamos el servicio
+
     private FilmService filmService;
 
     public FilmController(FilmService filmService) {
@@ -51,6 +50,23 @@ public class FilmController {
             return "Se ha borrado correctamente la película con nombre ";
         }
         return "No se ha encontrado la película con nombre ";
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<FilmDTO>> getFilmsByName(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Integer year,
+            @RequestParam(required = false) String genre) {
+
+        // Opcional: Prevenir valores nulos enviando un valor por defecto.
+        String safeName = (name != null && !name.isEmpty()) ? name : "";
+
+        List<FilmDTO> films = filmService.getFilmsByFilter(safeName, year, genre);
+        if (films.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Devolver 204 si no hay resultados
+        }
+
+        return ResponseEntity.ok(films);
     }
 
 

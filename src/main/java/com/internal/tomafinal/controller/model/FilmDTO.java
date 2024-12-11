@@ -7,12 +7,13 @@ public class FilmDTO {
     private Integer year;
     private String director;
     private String synopsis;
-    private Genre genre;
+    private GenreDTO genre;
     private Float avgRating;
     List<ReviewDTO> review;
     private String urlFilm;
+    private List<String> providerNames;
 
-    public enum Genre {
+    public enum GenreDTO {
         ACTION,
         ADVENTURE,
         COMEDY,
@@ -32,8 +33,8 @@ public class FilmDTO {
         BIOGRAPHY,
         SPORT;
 
-        public static Genre fromString(String value) {
-            for (Genre v : Genre.values()) {
+        public static GenreDTO fromString(String value) {
+            for (GenreDTO v : GenreDTO.values()) {
                 if (value.toUpperCase().equals(v.name())) {
                     return v;
                 }
@@ -45,7 +46,7 @@ public class FilmDTO {
     public FilmDTO() {
     }
 
-    public FilmDTO(String name, Integer year, String director, String synopsis, Genre genre, Float avgRating, String urlFilm) {
+    public FilmDTO(String name, Integer year, String director, String synopsis, GenreDTO genre, Float avgRating, String urlFilm) {
         this.name = name;
         this.year = year;
         this.director = director;
@@ -55,7 +56,7 @@ public class FilmDTO {
         this.urlFilm = urlFilm;
     }
 
-    public FilmDTO(String name, Integer year, String director, String synopsis, Genre genre, Float avgRating, List<ReviewDTO> review, String urlFilm) {
+    public FilmDTO(String name, Integer year, String director, String synopsis, GenreDTO genre, Float avgRating, List<ReviewDTO> review, String urlFilm) {
         this.name = name;
         this.year = year;
         this.director = director;
@@ -82,7 +83,7 @@ public class FilmDTO {
         return synopsis;
     }
 
-    public Genre getGenre() {
+    public GenreDTO getGenre() {
         return genre;
     }
 
@@ -96,6 +97,14 @@ public class FilmDTO {
 
     public String getUrlFilm() {
         return urlFilm;
+    }
+
+    public List<String> getProviderNames() {
+        return providerNames;
+    }
+
+    public void setProviderNames(List<String> providerNames) {
+        this.providerNames = providerNames;
     }
 
     public void setUrlFilm(String urlFilm) {
