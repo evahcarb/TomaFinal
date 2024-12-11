@@ -1,6 +1,10 @@
 spring:
+  config:
+    import: classpath:secrets.yml
   application:
     name: tomafinal
   data:
     mongodb:
-      uri: mongodb://localhost:30000/tomafinaldb
+      uri: mongodb://mongodb:30000/tomafinaldb
+cors:
+  allowed-origin: http://localhost

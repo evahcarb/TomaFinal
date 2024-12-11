@@ -12,6 +12,8 @@ target/
 .settings
 .springBeans
 .sts4-cache
+secrets.yml
+
 
 ### IntelliJ IDEA ###
 .idea
